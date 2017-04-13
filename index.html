@@ -18,12 +18,18 @@
 		#mainContent{margin: 20px auto;}
 		.gameBoard{width: 500px;margin: 20px auto;}
 		#source_holder{width: 500px; height: 500px;background-size:500px 500px;clear:both;float:left;}
-		#helpText{
+		#helpText {
                     clear:both;
                     font-weight: bold;
                     color: #4D6C81;
                     max-width: 500px;
                     margin: 0 auto;
+                }
+                #helpText h1 {
+                    text-align: center;
+                    margin-top: 1rem;
+                    margin-bottom: 0;
+                    padding-bottom: 0;
                 }
 		.button{width : 100px; height: 30px;text-align:center;margin-bottom:5px; cursor:pointer;line-height:30px;margin-right:10px;background-color : #4D6C81;color : white;border-radius:5px;float:left;}
 		#slider{clear:both;}
@@ -77,7 +83,7 @@
 <div id="source_holder" class="hide"></div><div id="slider"></div><div id="previewDrag"></div>
 </div>
 <div id="helpText">
-<br/>拼圖遊戲開始囉！
+    <h1>拼圖遊戲開始囉！</h1>
 <ol>
 <li>灰色位置是空格，請點選/拖曳灰色位置周圍的拼圖來移動各別的拼圖。</li>
 <li>目標是要將拼圖還原成你原本的圖片。</li>
