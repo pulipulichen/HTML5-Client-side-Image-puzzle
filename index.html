@@ -17,7 +17,13 @@
                 }
 		#mainContent{margin: 20px auto;}
 		.gameBoard{width: 500px;margin: 20px auto;}
-		#source_holder{width: 500px; height: 500px;background-size:500px 500px;clear:both;float:left;}
+		#source_holder{
+                    width: 500px; 
+                    height: 500px;
+                    background-size:500px;
+                    clear:both;
+                    float:left;
+                }
 		#helpText {
                     clear:both;
                     font-weight: bold;
@@ -37,7 +43,11 @@
 		.show{ display:block;}
 		.floatleft{ float : left;}
 		.floatRight{ float : right;}
-		.tile{ width: 125px; height: 125px;background-size:500px 500px;}
+		.tile{ 
+                    width: 125px; 
+                    height: 125px;
+                    background-size:500px;
+                }
 		.timeCount{font-weight: bold;color: #4D6C81;height:30px;width : 100px;line-height:30px;}
 		.onHover{ -webkit-transform: scale(1.1); -o-transform: scale(1.1); -moz-transform: scale(1.1); }
 		.tile.tile00{background-position: 0px 0px;}
@@ -84,7 +94,7 @@
 <div id="source_holder" class="hide"></div><div id="slider"></div><div id="previewDrag"></div>
 </div>
 <div id="helpText">
-    <h1>拼圖遊戲開始囉！</h1>
+    <h1>圖片拼圖遊戲開始囉！</h1>
 <ol>
 <li>灰色位置是空格，請點選/拖曳灰色位置周圍的拼圖來移動各別的拼圖。</li>
 <li>目標是要將拼圖還原成你原本的圖片。</li>
@@ -95,11 +105,11 @@
 <div id="uploadContainer">
 
 <div id="dragContainer">
-    <h1>準備拼圖</h1>
-
+    <h1>圖片拼圖遊戲設定</h1>
+    請選擇以下一種方式開始遊戲：
     <ul>
         <li>請從您的電腦上拖曳圖片檔案到這個位置</li>
-        <li>上傳檔案：<input type="file" id="imageholder" /></li>
+        <li>上傳圖片檔案：<input type="file" id="imageholder" /></li>
         <li>
             <form action="." method="get">
                 <label for="url_input">Image URL: </label>

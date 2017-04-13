@@ -171,7 +171,7 @@ slider.readURL = function (url) {
         myrules = mysheet.rules;
 
     for (var i = 0; i < myrules.length; i++) {
-        if (myrules[i].selectorText.toLowerCase() == ".tile") {
+        if (myrules[i].selectorText.toLowerCase() === ".tile") {
             myrules[i].style.backgroundImage = "url('" + url + "')";
             if (slider.uploadContainer === undefined) {
                 slider.uploadContainer = document.getElementById("uploadContainer");
