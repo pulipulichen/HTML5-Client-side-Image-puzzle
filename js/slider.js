@@ -154,7 +154,7 @@ slider.attachDragNDrop = function(){
 
 slider.readURL = function (url) {
     var _source_holder = document.getElementById("source_holder");
-    if (_source_holder === undefined) {
+    if (_source_holder === undefined || _source_holder === null) {
         setTimeout(function () {
             slider.readURL(url);
         }, 1000);
