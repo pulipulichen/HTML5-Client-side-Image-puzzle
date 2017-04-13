@@ -3,9 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
-	<title>HTML5 Client side Image puzzle</title>
+	<title>拼圖遊戲(HTML5客戶端應用程式)</title>
 	<style>
-		#uploadContainer{width: 300px; height: 300px; margin: 20px auto; border: 3px dashed #ccc; text-align: center; background-color : #4D6C81;color : white;}
+		#uploadContainer{
+                    width: 75vh; 
+                    /*height: 300px;*/
+                    /*height: 75vh;*/
+                    margin: 20px auto; 
+                    padding-bottom: 20px;
+                    border: 3px dashed #ccc; text-align: center; background-color : #4D6C81;color : white;}
+                #uploadContainer ul {
+                    text-align: left;
+                }
 		#mainContent{margin: 20px auto;}
 		.gameBoard{width: 500px;margin: 20px auto;}
 		#source_holder{width: 500px; height: 500px;background-size:500px 500px;clear:both;float:left;}
@@ -53,31 +62,47 @@
 <div id="mainContent" class="hide">
 
 <div class="gameBoard">
-<div id="source" class="button" onclick="slider.helpclick('source');">Source</div><div id="game" onclick="slider.helpclick('game');" class="button">Game</div><div id="shuffle" onclick="slider.helpclick('shuffle');" class="button">Shuffle</div><span id="timeElapsed" class="floatRight timeCount"></span>
+<div id="source" class="button" onclick="slider.helpclick('source');">觀看完成圖</div>
+<div id="game" onclick="slider.helpclick('game');" class="button" style="display: none;">繼續挑戰</div>
+<div id="shuffle" onclick="slider.helpclick('shuffle');" class="button">拼圖洗牌</div>
+<span id="timeElapsed" class="floatRight timeCount"></span>
 </div>
 <div class="gameBoard">
 <div id="source_holder" class="hide"></div><div id="slider"></div><div id="previewDrag"></div>
 </div>
-<div id="helpText"><br/>Cool!! Your image is turned into puzzle. 
+<div id="helpText">
+<br/>拼圖遊戲開始囉！
 <ol>
-<li>Solve the puzzle by rearranging the jumbled tiles into the image you have uploaded.</li>
-<li>Grey colored tile is an open space.</li>
-<li>Finding legally movable tile is very simple, Any tile which has open space in its row or column can be legally moved. In desktop browsers it will be highlighted on hovering the mouse.</li>
-<li>To move tile/tiles just simply click/drag/tap on it. Upon doing so the tile/tiles will slide it to an open space.</li>
+<li>灰色位置是空格，請點選/拖曳灰色位置周圍的拼圖來移動各別的拼圖。</li>
+<li>目標是要將拼圖還原成你原本的圖片。</li>
 </ol>
 
 </div>
 </div>
 <div id="uploadContainer">
 
-
-<br/><br/>
 <div id="dragContainer">
-<br/><br/>Drop an image here from your machine <br/> (Or) <br/>
-<input type="file" id="imageholder" /><br/><br/><br/><br/> 500x500 image is preferrable. Don't you have? <br/> No problem!! We will shrink it for you :)
+    <h1>準備拼圖</h1>
+
+    <ul>
+        <li>請從您的電腦上拖曳圖片檔案到這個位置</li>
+        <li>上傳檔案：<input type="file" id="imageholder" /></li>
+        <li>
+            <form action="." method="get">
+                <label for="url_input">Image URL: </label>
+                <input type="text" name="img" id="url_input" value="demo.png" />
+                <input type="button" value="開始" onclick="window.open('?img='+document.getElementById('url_input').value, '_self');" />
+            </form>
+        </li>
+        <li><button type="button" class="demo_image" onclick="slider.readDemo();">使用範例圖片</button></li>
+    </ul>
+
+<br/>建議使用500x500的圖片。上傳的圖片會自動調整到這個尺寸。
 </div>
 </div>
 
+    
+    
 </body>
 </html>
 

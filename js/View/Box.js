@@ -171,7 +171,7 @@
 				s.v.addClass(self.sourceHolder,"hide");
 				break;
 			case "shuffle":
-				var bool = confirm("You will lose current game state. Are you sure?");
+				var bool = confirm("你確定要將拼圖洗牌嗎？");
 				if(bool){
 					s.generateGame();
 					s.initGame();

@@ -40,7 +40,13 @@
 		// Swap the tiles in the UI
 		s.v.puzzle.swapTiles(previousEmptyRef ,direction , displacement);
 	
-		(s.m.state.join()===s.m.solution.join()) && alert("Great!! You won the game and the elapsed time is "+s.timerDiv.innerHTML);
+            if (s.m.state.join()===s.m.solution.join()) {
+                setTimeout(function () {
+                    alert("恭喜您完成拼圖了！您的完成時間是："+s.timerDiv.innerHTML);
+                    //slider.stopTimer = true;
+                    clearInterval(slider.timer);
+                }, 0);
+            }
 		
 	};
 	

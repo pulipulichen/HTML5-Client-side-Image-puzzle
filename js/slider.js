@@ -14,11 +14,22 @@ if(slider.userAgent.search("iphone") > -1 || slider.userAgent.search("ipad") > -
 	slider.isMobile = true;
 }
 slider.timerDiv = "";
-	
+
+slider.stopTimer = false;
 
 
 slider.helpclick = function(msg){
-	if(slider.v.puzzle) slider.v.puzzle.layoutmanager(msg);
+    if(slider.v.puzzle) {
+        slider.v.puzzle.layoutmanager(msg);
+        if (msg === "game") {
+            document.getElementById("game").style.display = "none";
+            document.getElementById("source").style.display = "block";
+        }
+        else if (msg === "source") {
+            document.getElementById("source").style.display = "none";
+            document.getElementById("game").style.display = "block";
+        }
+    }
 };
 
 slider.log = function(message, type){
@@ -42,35 +53,36 @@ slider.initGame = function(){
 };
 
 
-slider.generateGame = function(){
-	var s = slider,
-		alltiles = ["tile00","tile01","tile02","tile03",
-	                "tile10","tile11","tile12","tile13",
-	                "tile20","tile21","tile22","tile23",
-	                "tile30","tile31","tile32","tile33"];
-	
-	for(var i = 0 ; i < s.c.sliderSize ; i++){
-		for(var j = 0 ; j < s.c.sliderSize ; j++){
-			var index = Math.floor(Math.random()*alltiles.length),
-				tile = alltiles[index];
-			slider.log("len "+alltiles.length+" - tile="+tile,"info");
-			alltiles.splice(index,1);
-			s.m.state[i][j] = tile;
-			if(tile==s.m.emptyTile){
-				s.m.emptyRef["x"] = i; 
-				s.m.emptyRef["y"] = j;
-			} 
-		}
-	}
-		
-		
-	
-	
+slider.generateGame = function () {
+    var s = slider;
+    var alltiles = ["tile00", "tile01", "tile02", "tile03",
+        "tile10", "tile11", "tile12", "tile13",
+        "tile20", "tile21", "tile22", "tile23",
+        "tile30", "tile31", "tile32", "tile33"];
+    /*
+    var alltiles = ["tile00", "tile01", "tile02",
+        "tile10", "tile11", "tile12", 
+        "tile20", "tile21", "tile22"];
+    */
+
+    for (var i = 0; i < s.c.sliderSize; i++) {
+        for (var j = 0; j < s.c.sliderSize; j++) {
+            var index = Math.floor(Math.random() * alltiles.length),
+                    tile = alltiles[index];
+            slider.log("len " + alltiles.length + " - tile=" + tile, "info");
+            alltiles.splice(index, 1);
+            s.m.state[i][j] = tile;
+            if (tile == s.m.emptyTile) {
+                s.m.emptyRef["x"] = i;
+                s.m.emptyRef["y"] = j;
+            }
+        }
+    }
 };
 
 var initTimer = function(){
 	
-	setInterval(function(){
+	slider.timer = setInterval(function(){
 		slider.m.timeElapsed++;
 		
 		 var secs = slider.m.timeElapsed,
@@ -115,7 +127,6 @@ slider.readFileAsDataURL = function(file) {
 
 
 slider.attachDragNDrop = function(){
-
 	
 	var holder = document.getElementById("dragContainer");
 	slider.holder = holder;
@@ -141,3 +152,56 @@ slider.attachDragNDrop = function(){
 
 };
 
+slider.readURL = function (url) {
+    document.getElementById("source_holder").style.backgroundImage = 'url(' + url + ')';
+
+    var mysheet = document.styleSheets[0],
+            myrules = [];
+
+    if (mysheet.cssRules)
+        myrules = mysheet.cssRules;
+    else if (mysheet.rules)
+        myrules = mysheet.rules;
+
+    for (var i = 0; i < myrules.length; i++) {
+        if (myrules[i].selectorText.toLowerCase() == ".tile") {
+            myrules[i].style.backgroundImage = "url('" + url + "')";
+            if (slider.uploadContainer === undefined) {
+                slider.uploadContainer = document.getElementById("uploadContainer");
+            }
+            slider.uploadContainer.className = "hide";
+            document.getElementById("mainContent").className = "";
+            slider.initGame();
+            initTimer();
+            break;
+        }
+    }
+};
+
+slider.readDemo = function () {
+    slider.readURL("demo.png");
+};
+
+slider.loadByParameter = function () {
+    var getQueryVariable = function (variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] === variable) {
+                return pair[1];
+            }
+        }
+        //alert('Query Variable ' + variable + ' not found');
+        return undefined;
+    };
+    
+    var _img = getQueryVariable("img");
+    if (_img !== undefined) {
+        slider.readURL(_img);
+    }
+};
+
+setTimeout(function () {
+    slider.loadByParameter();
+}, 0);
