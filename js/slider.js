@@ -153,7 +153,14 @@ slider.attachDragNDrop = function(){
 };
 
 slider.readURL = function (url) {
-    document.getElementById("source_holder").style.backgroundImage = 'url(' + url + ')';
+    var _source_holder = document.getElementById("source_holder");
+    if (_source_holder === undefined) {
+        setTimeout(function () {
+            slider.readURL(url);
+        }, 1000);
+        return;
+    }
+    _source_holder.style.backgroundImage = 'url(' + url + ')';
 
     var mysheet = document.styleSheets[0],
             myrules = [];
