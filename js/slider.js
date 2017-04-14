@@ -315,6 +315,27 @@ slider.loadByParameter = function () {
     }
 };
 
+slider.calcSliderWidth = function () {
+    var _len;
+    var _width = $(window).width();
+    var _height = $(window).height();
+    
+    var _padding = 20;
+    if (_width < _height) {
+        _len = _width - _padding;
+    }
+    else {
+        _len = _height - _padding;
+    }
+    //console.log([_width, _height]);
+    
+    if (_len > 500) {
+        _len = 500;
+    }
+    console.log(_len);
+    return _len;
+};
+
 setTimeout(function () {
     slider.loadByParameter();
 }, 0);

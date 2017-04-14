@@ -5,10 +5,11 @@
 */
 ;(function(w,s){
     s.model = function () {
-        console.log("start model");
+        //console.log("start model");
         
         s.m.size = slider.tileSize;
-        s.m.tileSize = (500 / s.m.size);
+        var _slider_width = slider.calcSliderWidth()
+        s.m.tileSize = (_slider_width / s.m.size);
         s.m.emptyTile = "tile" + (s.m.size-1) + "" + (s.m.size-1);
 	//console.log(s.m.emptyTile);
         
@@ -97,8 +98,11 @@
                 _tileStyle.push(_classname + " {background-position: " + _x_px + " " + _y_px + " !important} ");
             }
         }
-        _tileStyle.push(".tile {width: " + s.m.tileSize + "px !important; height: " + s.m.tileSize + "px !important} ");
-        _tileStyle.push("." + s.m.emptyTile + " {background: #666666 !important;cursor: default;} ");
+        _tileStyle.push(".tile {width: " + s.m.tileSize + "px !important; height: " + s.m.tileSize + "px !important; background-size:" + _slider_width + "px;} ");
+        _tileStyle.push("." + s.m.emptyTile + " {background: #666666 !important;} ");
+        _tileStyle.push(".gameBoard {width: " + _slider_width + "px !important;}");
+        _tileStyle.push("#source_holder {width: " + _slider_width + "px !important;height: " + _slider_width + "px !important;background-size:" + _slider_width + "px;}");
+        _tileStyle.push("#helpText {max-width: " + _slider_width + "px !important;}");
         style.innerHTML = _tileStyle.join("\n");
         //console.log(_tileStyle);
         document.getElementsByTagName('head')[0].appendChild(style);
