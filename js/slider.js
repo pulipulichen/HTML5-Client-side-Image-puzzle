@@ -4,11 +4,20 @@
 	YIM : pola_venki  Gtalk : pola.venki  Skype : pola.venki
 */
 var slider = {};
+
+//slider.logLevel = 4;
+slider.tileSize = 3;
+slider.enable = true;
+slider.enableSuffle = false;
+
+// -----------------------------------------------
+
 slider.m = {};
 slider.v = {};
 slider.c = {};
-slider.logLevel = 4;
-slider.isIE = (navigator.appName.indexOf("Microsoft") != -1)?true:false;
+
+
+slider.isIE = (navigator.appName.indexOf("Microsoft") !== -1)?true:false;
 slider.userAgent = navigator.userAgent.toLowerCase();
 if(slider.userAgent.search("iphone") > -1 || slider.userAgent.search("ipad") > -1 || slider.userAgent.search("android") > -1){
 	slider.isMobile = true;
@@ -31,7 +40,8 @@ slider.helpclick = function(msg){
         }
         else if (msg === "share") {
             var _time = document.getElementById("timeElapsed").innerText;
-            var _title = "我花了" + _time + "就完成了這張拼圖，你做得到嗎？";
+            var _step = document.getElementById("stepElapsed").innerText;
+            var _title = "我花了" + _time + "跟" + _step + "步就完成了這張" + slider.tileSize + "x" + slider.tileSize + "的拼圖，你做得到嗎？";
             //var _title = "aaa";
             _title = encodeURIComponent(_title);
             //alert("分享!!" + _time);
@@ -77,32 +87,56 @@ slider.helpclick = function(msg){
 };
 
 slider.log = function(message, type){
-	if(typeof(console) == 'undefined' || console == null || !slider.logLevel) return;
-	try{
-		if(type=="error")
-			console.error("slider: "+message);
-		else if(type=="warn" && slider.logLevel >= 2)
-			console.warn("slider: "+message);
-		else if(type=="info" && slider.logLevel >= 3)
-			console.info("slider: "+message);
-		else if(slider.logLevel >= 4)
-			console.log("slider: "+message);
-	}catch(e){
-	}
+    if (typeof (console) == 'undefined' || console == null || !slider.logLevel) {
+        return;
+    }
+    try {
+        if (type == "error")
+            console.error("slider: " + message);
+        else if (type == "warn" && slider.logLevel >= 2)
+            console.warn("slider: " + message);
+        else if (type == "info" && slider.logLevel >= 3)
+            console.info("slider: " + message);
+        else if (slider.logLevel >= 4)
+            console.log("slider: " + message);
+    } catch (e) {
+    }
 };
 
 slider.initGame = function(){
-	slider.v.puzzle = new slider.v.Box();
-	slider.v.puzzle.paintPuzzle();
+    if (typeof($) !== "function" || typeof(slider.model) !== "function" || typeof(slider.controller) !== "function") {
+        setTimeout(function () {
+            slider.initGame();
+        }, 100);
+        return;
+    }
+    
+    slider.model();
+    slider.controller();
+    slider.v.puzzle = new slider.v.Box();
+    slider.v.puzzle.paintPuzzle();
+    
+    $(".tileSize").text(slider.tileSize);
+    //console.log("initGame");
 };
 
 
 slider.generateGame = function () {
+    console.log("generateGame");
     var s = slider;
+    
+    var alltiles = [];
+    for (var _x = 0; _x < slider.tileSize; _x++) {
+        for (var _y = 0; _y < slider.tileSize; _y++) {
+            alltiles.push("tile" + _x + "" + _y);
+        }
+    }
+    /*
     var alltiles = ["tile00", "tile01", "tile02", "tile03",
         "tile10", "tile11", "tile12", "tile13",
         "tile20", "tile21", "tile22", "tile23",
         "tile30", "tile31", "tile32", "tile33"];
+    */
     /*
     var alltiles = ["tile00", "tile01", "tile02",
         "tile10", "tile11", "tile12", 
@@ -116,7 +150,7 @@ slider.generateGame = function () {
             slider.log("len " + alltiles.length + " - tile=" + tile, "info");
             alltiles.splice(index, 1);
             s.m.state[i][j] = tile;
-            if (tile == s.m.emptyTile) {
+            if (tile === s.m.emptyTile) {
                 s.m.emptyRef["x"] = i;
                 s.m.emptyRef["y"] = j;
             }
@@ -125,18 +159,18 @@ slider.generateGame = function () {
 };
 
 var initTimer = function(){
-	
-	slider.timer = setInterval(function(){
-		slider.m.timeElapsed++;
-		
-		 var secs = slider.m.timeElapsed,
-		 	hours = Math.floor(secs / (60 * 60)),
-		 	divisor_for_minutes = secs % (60 * 60),
-		    minutes = Math.floor(divisor_for_minutes / 60),
-		    divisor_for_seconds = divisor_for_minutes % 60,
-		    seconds = Math.ceil(divisor_for_seconds);
-		slider.timerDiv.innerHTML = (hours < 10 ? "0"+hours : hours) + ":" + (minutes < 10 ? "0"+minutes: minutes)  + ":" + (seconds < 10 ? "0"+seconds: seconds);
-	},1000);
+
+    slider.timer = setInterval(function () {
+        slider.m.timeElapsed++;
+
+        var secs = slider.m.timeElapsed,
+                hours = Math.floor(secs / (60 * 60)),
+                divisor_for_minutes = secs % (60 * 60),
+                minutes = Math.floor(divisor_for_minutes / 60),
+                divisor_for_seconds = divisor_for_minutes % 60,
+                seconds = Math.ceil(divisor_for_seconds);
+        slider.timerDiv.innerHTML = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+    }, 1000);
 	
 };
 
@@ -207,6 +241,7 @@ slider.readURL = function (url) {
     }
     _source_holder.style.backgroundImage = 'url(' + url + ')';
     slider.imageURL = url;
+    document.getElementById("url_input").value = url;
 
     var mysheet = document.styleSheets[0],
             myrules = [];
@@ -232,7 +267,14 @@ slider.readURL = function (url) {
 };
 
 slider.readDemo = function () {
-    slider.readURL("demo.png");
+    //slider.readURL("demo.png");
+    location.href = "?img=demo.png&size=" + slider.getSelectTileSize();
+};
+
+slider.getSelectTileSize = function () {
+    var _size = $('[name="tileSize"]:checked').val();
+    _size = parseInt(_size, 10);
+    return _size;
 };
 
 slider.loadByParameter = function () {
@@ -250,6 +292,21 @@ slider.loadByParameter = function () {
     };
     
     var _img = getQueryVariable("img");
+    var _size = getQueryVariable("size");
+    if (_size !== undefined) {
+        slider.tileSize = parseInt(_size, 10);
+        if (slider.tileSize < 2) {
+            slider.tileSize = 2;
+        }
+        else if (slider.tileSize > 7) {
+            slider.tileSize = 7;
+        }
+        //console.log(slider.tileSize);
+        var _size_input = document.getElementById('tileSize' + slider.tileSize);
+        if (_size_input !== null) {
+            _size_input.checked = "checked";
+        }
+    }
     if (_img !== undefined) {
         slider.readURL(_img);
     }

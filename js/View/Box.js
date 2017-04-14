@@ -13,8 +13,27 @@
 		this.previewDrag = s.v.getEl("previewDrag");
 		this.isDragged = false;
 		var self = this;
+                
+                this.startEvent = function () {
+                    if (typeof(ga) !== "function") {
+                        var _this = this;
+                        setTimeout(function () {
+                            _this.startEvent();
+                        }, 100);
+                        return;
+                    }
+                    
+                    var _url = slider.imageURL;
+                    if (_url === undefined) {
+                        _url = "(none)";
+                    }
+                    ga('send', 'event', "start_puzzle", "url:" + _url);
+                };
+                
 		this.paintPuzzle = function(){
-			
+                        document.addEventListener("keydown", puzzleKeyEvent, false);
+                        this.startEvent();
+                        
 			// Paint the puzzle by reading the state from model 
 			
 			self.placeHolder.innerHTML = "";
@@ -73,6 +92,7 @@
 			self.previewDrag.innerHTML = "";
 			var noOfTilesToMove = (displacement < 0) ? (displacement * -1) : displacement;
 			for(var i = 0 , x = targetCords["x"] , y = targetCords["y"]; i <= noOfTilesToMove ; i++){
+                                //console.log("box"+x+y)
 				var ref = s.v.getEl("box"+x+y);
 				ref.className = "tile "+s.m.state[x][y]+" floatleft";
 				if(direction==="y"){
@@ -81,7 +101,14 @@
 					x = (displacement<0) ? x +1  : x -1;
 				}
 			}
+                        this.addStep();
 		};
+                
+                this.addStep = function () {
+                    var _step = $("#stepElapsed").text();
+                    _step = parseInt(_step, 10) + 1;
+                    $("#stepElapsed").text(_step);
+                };
 
 		
 		this.makeDraggable = function(tile , dragData){
@@ -202,5 +229,44 @@
 	
 	s.v.Box = Box;
 	
-	
+    var puzzleKeyEvent = function (e) {
+        var keyCode = e.keyCode;
+        //console.log(keyCode);
+        if (keyCode === 38 || keyCode === 40 || keyCode === 37 || keyCode === 39 || keyCode === 90) {
+            var _gray_tile = $("#slider .tile" + (slider.tileSize-1) + "" + (slider.tileSize-1));
+            var _gray_tile_pos = _gray_tile.attr("id").substr(3,2).split("");
+            _gray_tile_pos = {
+                x: parseInt(_gray_tile_pos[1], 10),
+                y: parseInt(_gray_tile_pos[0], 10)
+            };
+            //console.log(_gray_tile_pos);
+            
+            if (keyCode === 38 && _gray_tile_pos.y !== slider.tileSize-1) {
+                // 上
+                //console.log("move 上");
+                $("#box" + (_gray_tile_pos.y+1) + "" + (_gray_tile_pos.x)).click();
+            }
+            else if (keyCode === 40 && _gray_tile_pos.y !== 0) {
+                // 下
+                //console.log("move 下");
+                $("#box" + (_gray_tile_pos.y-1) + "" + (_gray_tile_pos.x)).click();
+            }
+            else if (keyCode === 37 && _gray_tile_pos.x !== slider.tileSize-1) {
+                // 左
+                //console.log("move 左");
+                $("#box" + (_gray_tile_pos.y) + "" + (_gray_tile_pos.x+1)).click();
+            }
+            else if (keyCode === 39 && _gray_tile_pos.x !== 0) {
+                // 右
+                //console.log("move 右");
+                $("#box" + (_gray_tile_pos.y) + "" + (_gray_tile_pos.x-1)).click();
+            }
+            else if (keyCode === 90) {
+                // z
+                $(".preview-target:visible").click();
+            }
+            
+            e.preventDefault();
+        }
+    };
 })(window,slider);

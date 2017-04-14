@@ -33,7 +33,7 @@
 	}();
 	
 	s.v.createEl = function(tagName, attr){
-		if(typeof tagName != "string")
+		if(typeof tagName !== "string")
 			return null;
 		var node = document.createElement(tagName);
 		if(attr){

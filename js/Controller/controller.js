@@ -4,20 +4,27 @@
 	YIM : pola_venki  Gtalk : pola.venki  Skype : pola.venki
 */
 ;(function(w,s){
-	
-	s.c.sliderSize = 4;
+    s.controller = function () {
+	s.c.sliderSize = slider.tileSize;
 	
 	s.c.isMovelLegal = function(x, y){
 		var retValue = {"isLegal" : false};
+                
+                
+            if (slider.enable === false) {
+                return retValue;
+            }
 		if(s.m.emptyRef["x"]===x && s.m.emptyRef["y"]!==y){
 			retValue = {"isLegal" : true , "direction" : "y" , "displacement" : s.m.emptyRef["y"]-y};
 		}else if(s.m.emptyRef["y"]===y && s.m.emptyRef["x"]!==x){
 			retValue = {"isLegal" : true , "direction" : "x" , "displacement" : s.m.emptyRef["x"]-x};
 		}
+                //console.log(retValue);
 		return retValue;
 	};
 	
 	s.c.swap = function(source, direction , displacement){
+            
 		var noOfIterations,previousEmptyRef;
 		noOfIterations = (displacement<0) ? displacement * -1  : displacement;
 		previousEmptyRef = {"x" : s.m.emptyRef["x"] , "y" : s.m.emptyRef["y"]};
@@ -50,15 +57,15 @@
                 }
                 
                 var _time = document.getElementById("timeElapsed").innerText;
-                ga('send', 'event', "finish_puzzle", "time:"+_time, "url" + slider.imageURL);
-                
+                var _step = document.getElementById("stepElapsed").innerText;
+                ga('send', 'event', "finish_puzzle", "time:"+_time + ",step:" + _step + ",size:"+slider.tileSize, "url:" + slider.imageURL);
+                slider.enable = false;
                 setTimeout(function () {
-                    alert("恭喜您完成拼圖了！您的完成時間是："+s.timerDiv.innerHTML);
+                    alert("恭喜您完成拼圖了！您的完成時間是："+ _step + "，總共花了" + _step + "步。");
                     //slider.stopTimer = true;
                 }, 0);
             }
-		
 	};
 	
-	
+    };
 })(window,slider);
