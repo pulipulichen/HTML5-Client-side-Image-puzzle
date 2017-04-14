@@ -29,6 +29,36 @@ slider.helpclick = function(msg){
             document.getElementById("source").style.display = "none";
             document.getElementById("game").style.display = "block";
         }
+        else if (msg === "share") {
+            var _time = document.getElementById("timeElapsed").innerText;
+            var _title = "我在" + _time + "完成了這張拼圖，你做得到嗎？";
+            //var _title = "aaa";
+            _title = encodeURIComponent(_title);
+            //alert("分享!!" + _time);
+            var _u = location.href; 
+            //_u = "http://www.google.com.tw";
+            _u = encodeURIComponent(_u);
+            
+            var _description = "圖片拼圖遊戲";
+            _description = encodeURIComponent(_description);
+            
+            var _url = "http://www.facebook.com/sharer.php?u=" + _u + "&title=" + _title + "&description=" + _description;
+            // http://www.facebook.com/sharer.php?s=100&p[title]=titleheresexily&p[url]=http://www.google.com&p[summary]=mysexysummaryhere&p[images][0]=http://www.urltoyoursexyimage.com
+            
+            window.open(_url, "", 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+            /*
+            var fburl = 'http://www.google.com.tw';
+            var fbimgurl = '';
+            var fbtitle = 'Your title';
+            var fbsummary = "your description";
+            var sharerURL = "http://www.facebook.com/sharer/sharer.php?u=" + encodeURI(fburl) + "&title=" + encodeURI(fbtitle) + "&caption=" + encodeURI(fbsummary) + "&quote=qqqqqq&description=dddddd";
+            window.open(
+              sharerURL,
+              'facebook-share-dialog', 
+              'width=626,height=436'); 
+            return  false;
+            */
+        }
     }
 };
 
@@ -152,6 +182,7 @@ slider.attachDragNDrop = function(){
 
 };
 
+slider.imageURL = undefined;
 slider.readURL = function (url) {
     var _source_holder = document.getElementById("source_holder");
     if (_source_holder === undefined || _source_holder === null) {
@@ -161,6 +192,7 @@ slider.readURL = function (url) {
         return;
     }
     _source_holder.style.backgroundImage = 'url(' + url + ')';
+    slider.imageURL = url;
 
     var mysheet = document.styleSheets[0],
             myrules = [];

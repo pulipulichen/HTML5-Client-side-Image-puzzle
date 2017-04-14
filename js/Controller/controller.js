@@ -41,10 +41,17 @@
 		s.v.puzzle.swapTiles(previousEmptyRef ,direction , displacement);
 	
             if (s.m.state.join()===s.m.solution.join()) {
+            //if (true) {
+                clearInterval(slider.timer);
+                document.getElementById("gameBoardPlaying").style.display = "none";
+                document.getElementById("gameBoardFinish").style.display = "block";
+                
+                var _time = document.getElementById("timeElapsed").innerText;
+                ga('send', 'event', "finish_puzzle", "time:"+_time, "url" + slider.imageURL);
+                
                 setTimeout(function () {
                     alert("恭喜您完成拼圖了！您的完成時間是："+s.timerDiv.innerHTML);
                     //slider.stopTimer = true;
-                    clearInterval(slider.timer);
                 }, 0);
             }
 		
