@@ -44,7 +44,7 @@ slider.helpclick = function(msg){
         else if (msg === "share") {
             var _time = document.getElementById("timeElapsed").innerText;
             var _step = document.getElementById("stepElapsed").innerText;
-            var _title = "我花了" + _time + "跟" + _step + "步就完成了這張" + slider.tileSize + "x" + slider.tileSize + "的拼圖，你做得到嗎？";
+            var _title = "我花了" + _time + "跟用" + _step + "步就完成了這張" + slider.tileSize + "x" + slider.tileSize + "的拼圖，你做得到嗎？";
             //var _title = "aaa";
             _title = encodeURIComponent(_title);
             //alert("分享!!" + _time);
