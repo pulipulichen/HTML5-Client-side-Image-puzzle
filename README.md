@@ -10,3 +10,5 @@ https://pulipulichen.github.io/HTML5-Client-side-Image-puzzle/demo.png
 https://avatars.plurk.com/1422855-big2.jpg
 
 https://analytics.google.com/analytics/web/#realtime/rt-event/a37178375w143357224p147984140/
+
+http://www.favicomatic.com
