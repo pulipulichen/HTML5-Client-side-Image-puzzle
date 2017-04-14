@@ -24,7 +24,7 @@
         <div id="source" class="button preview-target" onclick="slider.helpclick('source');">目標圖片(z)</div>
         <div id="game" onclick="slider.helpclick('game');" class="button preview-target" style="display: none;">繼續挑戰(z)</div>
         <div id="shuffle" onclick="slider.helpclick('shuffle');" class="button">拼圖洗牌</div>
-        <div id="newgame" onclick="location.href='index.html?size=' + slider.getSelectTileSize();" class="button">換一張圖</div>
+        <div id="newgame" onclick="slider.helpclick('newgame');" class="button">換一張圖</div>
     </div>
     <div id="gameBoardFinish">
         <div id="share" class="button" onclick="slider.helpclick('share');">
@@ -32,7 +32,7 @@
             分享
         </div>
         <div id="reset" onclick="location.reload();" class="button">再玩一次</div>
-        <div id="newgame" onclick="location.href='index.html'" class="button">換一張圖</div>
+        <div id="newgame" onclick="slider.helpclick('newgame');" class="button">換一張圖</div>
     </div>
 
         

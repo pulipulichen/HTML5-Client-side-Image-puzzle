@@ -38,6 +38,9 @@ slider.helpclick = function(msg){
             document.getElementById("source").style.display = "none";
             document.getElementById("game").style.display = "block";
         }
+        else if (msg === "newgame") {
+            location.href='index.html?size=' + slider.getSelectTileSize();
+        }
         else if (msg === "share") {
             var _time = document.getElementById("timeElapsed").innerText;
             var _step = document.getElementById("stepElapsed").innerText;
