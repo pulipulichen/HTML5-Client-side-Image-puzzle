@@ -31,7 +31,7 @@ slider.helpclick = function(msg){
         }
         else if (msg === "share") {
             var _time = document.getElementById("timeElapsed").innerText;
-            var _title = "我在" + _time + "完成了這張拼圖，你做得到嗎？";
+            var _title = "我花了" + _time + "就完成了這張拼圖，你做得到嗎？";
             //var _title = "aaa";
             _title = encodeURIComponent(_title);
             //alert("分享!!" + _time);
@@ -42,7 +42,21 @@ slider.helpclick = function(msg){
             var _description = "圖片拼圖遊戲";
             _description = encodeURIComponent(_description);
             
+            var _picture = slider.imageURL;
+            if (_picture !== undefined) {
+                if (_picture === "demo.png") {
+                    _picture = "https://pulipulichen.github.io/HTML5-Client-side-Image-puzzle/demo.png";
+                }
+                
+                _picture = encodeURIComponent(_picture);
+            }
+            
+            
             var _url = "http://www.facebook.com/sharer.php?u=" + _u + "&title=" + _title + "&description=" + _description;
+            if (_picture !== undefined) {
+                _url = _url + "&picture=" + _picture;
+            }
+            
             // http://www.facebook.com/sharer.php?s=100&p[title]=titleheresexily&p[url]=http://www.google.com&p[summary]=mysexysummaryhere&p[images][0]=http://www.urltoyoursexyimage.com
             
             window.open(_url, "", 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');

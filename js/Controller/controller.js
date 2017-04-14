@@ -45,6 +45,9 @@
                 clearInterval(slider.timer);
                 document.getElementById("gameBoardPlaying").style.display = "none";
                 document.getElementById("gameBoardFinish").style.display = "block";
+                if (slider.imageURL === undefined) {
+                    document.getElementById("share").style.display = "none";
+                }
                 
                 var _time = document.getElementById("timeElapsed").innerText;
                 ga('send', 'event', "finish_puzzle", "time:"+_time, "url" + slider.imageURL);

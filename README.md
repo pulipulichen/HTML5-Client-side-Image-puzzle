@@ -5,3 +5,6 @@ Here is the demo @ https://pulipulichen.github.io/HTML5-Client-side-Image-puzzle
 
 Some of the cool stuff that i used are explained here http://polavenki.blogspot.in/2012/09/html5-client-side-image-puzzle.html
 
+https://pulipulichen.github.io/HTML5-Client-side-Image-puzzle/demo.png
+
+https://avatars.plurk.com/1422855-big2.jpg
