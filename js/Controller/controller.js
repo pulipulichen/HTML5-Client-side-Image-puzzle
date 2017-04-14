@@ -61,7 +61,7 @@
                 ga('send', 'event', "finish_puzzle", "time:"+_time + ",step:" + _step + ",size:"+slider.tileSize, "url:" + slider.imageURL);
                 slider.enable = false;
                 setTimeout(function () {
-                    alert("恭喜您完成拼圖了！您的完成時間是："+ _step + "，總共花了" + _step + "步。");
+                    alert("恭喜您完成拼圖了！您的完成時間是："+ _time + "，總共花了" + _step + "步。");
                     //slider.stopTimer = true;
                 }, 0);
             }
