@@ -6,9 +6,9 @@
 var slider = {};
 
 //slider.logLevel = 4;
-slider.tileSize = 3;
+slider.tileSize = 4;
 slider.enable = true;
-slider.enableSuffle = false;
+slider.enableSuffle = true;
 
 // -----------------------------------------------
 
