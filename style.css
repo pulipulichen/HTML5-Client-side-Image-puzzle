@@ -73,6 +73,8 @@
     display: inline-block;
     max-width: 140px;
     overflow: hidden;
+    padding-right: 1rem;
+    white-space: nowrap;
 }
 .onHover{ -webkit-transform: scale(1.1); -o-transform: scale(1.1); -moz-transform: scale(1.1); }
 
