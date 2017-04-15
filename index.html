@@ -109,9 +109,7 @@
         請選擇以下一種方式開始遊戲：
     </div>
     
-    <ul>
-        <li>請從您的電腦上拖曳圖片檔案到這個位置</li>
-        <li>上傳圖片檔案：<input type="file" id="imageholder" /></li>
+    <ol>
         <li>
             <form action="." method="get">
                 <a href="http://tinypic.com/" target="_blank" style="color: white;"><button type="button">上傳圖片</button></a>
@@ -120,13 +118,15 @@
                 <input type="button" value="開始" onclick="window.open('?img='+document.getElementById('url_input').value + '&size=' +  + slider.getSelectTileSize(), '_self');" />
             </form>
         </li>
+        <li>請從您的電腦上拖曳圖片檔案到這個位置</li>
+        <li>上傳圖片檔案: <input type="file" id="imageholder" /></li>
         <li><button type="button" class="demo_image" onclick="slider.readDemo();">使用範例圖片</button></li>
-    </ul>
+    </ol>
     
 
     <div>
         <br />
-        建議使用500x500的圖片，或是高度大於寬度的圖片，<br />
+        建議使用500x500的圖片，或是高度大於寬度的圖片。<br />
         拼圖遊戲會自動調整圖片尺寸到合適的大小。
     </div>
 </div>

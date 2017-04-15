@@ -52,6 +52,8 @@ slider.helpclick = function(msg){
                 _title = "我花了" + _time + "跟用" + _step + "步就完成了這張" + slider.tileSize + "x" + slider.tileSize + "的拼圖，你做得到嗎？";
             }
             
+            ga('send', 'event', "share", "url:" + slider.imageURL, _title);
+            
             //var _title = "aaa";
             _title = encodeURIComponent(_title);
             //alert("分享!!" + _time);
@@ -97,15 +99,17 @@ slider.helpclick = function(msg){
 };
 
 slider.log = function(message, type){
-    if (typeof (console) == 'undefined' || console == null || !slider.logLevel) {
+    if (typeof (console) === 'undefined' 
+            || console === null 
+            || !slider.logLevel) {
         return;
     }
     try {
-        if (type == "error")
+        if (type === "error")
             console.error("slider: " + message);
-        else if (type == "warn" && slider.logLevel >= 2)
+        else if (type === "warn" && slider.logLevel >= 2)
             console.warn("slider: " + message);
-        else if (type == "info" && slider.logLevel >= 3)
+        else if (type === "info" && slider.logLevel >= 3)
             console.info("slider: " + message);
         else if (slider.logLevel >= 4)
             console.log("slider: " + message);
@@ -256,6 +260,12 @@ slider.readURL = function (url) {
         }, 1000);
         return;
     }
+    
+    if ((url.match(/\.(jpeg|jpg|gif|png)$/) === null)) {
+        alert("這是一個無效的網址喔。");
+        return;
+    }
+    
     _source_holder.style.backgroundImage = 'url(' + url + ')';
     slider.imageURL = url;
     document.getElementById("url_input").value = url;
@@ -353,6 +363,27 @@ slider.calcSliderWidth = function () {
     return _len;
 };
 
+slider.checkURLwork = function (_url) {
+    var request;
+    if(window.XMLHttpRequest)
+        request = new XMLHttpRequest();
+    else
+        request = new ActiveXObject("Microsoft.XMLHTTP");
+    request.open('GET', _url, false);
+    request.send(); // there will be a 'pause' here until the response to come.
+    // the object request will be actually modified
+    if (request.status !== 200) {
+        return false;
+    }
+    else {
+        return true;
+    }
+};
+
 setTimeout(function () {
     slider.loadByParameter();
+    
+    //slider.checkURLwork("demo1.png", function (_result) {
+    //    alert(_result);
+    //});
 }, 0);
