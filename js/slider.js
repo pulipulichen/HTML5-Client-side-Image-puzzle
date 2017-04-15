@@ -9,6 +9,8 @@ var slider = {};
 slider.tileSize = 4;
 slider.enable = true;
 slider.enableSuffle = true;
+slider.tileSizeMin = 4;
+slider.tileSizeMax = 8;
 
 // -----------------------------------------------
 
@@ -39,7 +41,7 @@ slider.helpclick = function(msg){
             document.getElementById("game").style.display = "block";
         }
         else if (msg === "newgame") {
-            location.href='index.html?size=' + slider.getSelectTileSize();
+            location.href='index.html?size=' + slider.tileSize;
         }
         else if (msg === "share") {
             var _time = document.getElementById("timeElapsed").innerText;
@@ -310,17 +312,20 @@ slider.loadByParameter = function () {
     var _size = getQueryVariable("size");
     if (_size !== undefined) {
         slider.tileSize = parseInt(_size, 10);
-        if (slider.tileSize < 2) {
-            slider.tileSize = 2;
+        if (slider.tileSize < slider.tileSizeMin) {
+            slider.tileSize = slider.tileSizeMin;
         }
-        else if (slider.tileSize > 7) {
-            slider.tileSize = 7;
+        else if (slider.tileSize > slider.tileSizeMax) {
+            slider.tileSize = slider.tileSizeMax;
         }
         //console.log(slider.tileSize);
-        var _size_input = document.getElementById('tileSize' + slider.tileSize);
-        if (_size_input !== null) {
-            _size_input.checked = "checked";
-        }
+        setTimeout(function () {
+            var _size_input = document.getElementById('tileSize' + slider.tileSize);
+            //console.log('tileSize' + slider.tileSize);
+            if (_size_input !== null) {
+                _size_input.checked = "checked";
+            }
+        }, 100);
     }
     if (_img !== undefined) {
         slider.readURL(_img);
@@ -344,7 +349,7 @@ slider.calcSliderWidth = function () {
     if (_len > 500) {
         _len = 500;
     }
-    console.log(_len);
+    //console.log(_len);
     return _len;
 };
 

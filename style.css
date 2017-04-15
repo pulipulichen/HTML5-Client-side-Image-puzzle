@@ -5,8 +5,16 @@
     margin: 20px auto; 
     padding-bottom: 20px;
     border: 3px dashed #ccc; text-align: center; background-color : #4D6C81;color : white;}
+#uploadContainer .ul-helper {
+    /*text-align: left;*/
+    margin-top: 1rem;
+}
 #uploadContainer ul {
     text-align: left;
+    margin-top: 0;
+}
+#uploadContainer li {
+    line-height: 2rem;
 }
 #mainContent{margin: 20px auto;}
 .gameBoard{width: 500px;margin: 20px auto;}
