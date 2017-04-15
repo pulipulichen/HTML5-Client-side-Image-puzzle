@@ -43,13 +43,17 @@
 <div class="gameBoard">
 
     <div id="gameBoardPlaying">
+        <div id="share" class="button share" onclick="slider.helpclick('share');">
+            <img src="img/facebook.png" />
+            分享
+        </div>
         <div id="source" class="button preview-target" onclick="slider.helpclick('source');">目標圖片(z)</div>
         <div id="game" onclick="slider.helpclick('game');" class="button preview-target" style="display: none;">繼續挑戰(z)</div>
-        <div id="shuffle" onclick="slider.helpclick('shuffle');" class="button">拼圖洗牌</div>
+        <div id="shuffle" onclick="slider.helpclick('shuffle');" class="button">重新挑戰</div>
         <div id="newgame" onclick="slider.helpclick('newgame');" class="button">換一張圖</div>
     </div>
     <div id="gameBoardFinish">
-        <div id="share" class="button" onclick="slider.helpclick('share');">
+        <div id="share" class="button share" onclick="slider.helpclick('share');">
             <img src="img/facebook.png" />
             分享
         </div>
@@ -89,6 +93,7 @@
         <li>上傳圖片檔案：<input type="file" id="imageholder" /></li>
         <li>
             <form action="." method="get">
+                <a href="http://tinypic.com/" target="_blank" style="color: white;"><button type="button">上傳圖片</button></a>
                 <label for="url_input">輸入圖片網址: </label>
                 <input type="text" name="img" id="url_input" value="demo.png" />
                 <input type="button" value="開始" onclick="window.open('?img='+document.getElementById('url_input').value + '&size=' +  + slider.getSelectTileSize(), '_self');" />
@@ -98,9 +103,9 @@
     </ul>
     <div>
         難度:
-        <input type="radio" value="3" name="tileSize" id="tileSize3" />
+        <input type="radio" value="3" name="tileSize" id="tileSize3" checked="checked" />
         <label for="tileSize3">3x3</label>
-        <input type="radio" value="4" name="tileSize" id="tileSize4" checked="checked" />
+        <input type="radio" value="4" name="tileSize" id="tileSize4" />
         <label for="tileSize4">4x4</label>
         <input type="radio" value="5" name="tileSize" id="tileSize5" />
         <label for="tileSize5">5x5</label>
@@ -110,7 +115,7 @@
         <label for="tileSize7">7x7</label>
     </div>
 
-<br/>建議使用500x500的圖片，遊戲也會自動調整到圖片尺寸。
+<br/>建議使用500x500的圖片，或是高度大於寬度的圖片，拼圖遊戲會自動調整圖片尺寸到合適的大小。
 </div>
 </div>
 

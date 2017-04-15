@@ -53,7 +53,7 @@
                 document.getElementById("gameBoardPlaying").style.display = "none";
                 document.getElementById("gameBoardFinish").style.display = "block";
                 if (slider.imageURL === undefined) {
-                    document.getElementById("share").style.display = "none";
+                    $(".share").hide();
                 }
                 
                 var _time = document.getElementById("timeElapsed").innerText;

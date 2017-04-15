@@ -198,10 +198,11 @@
 				s.v.addClass(self.sourceHolder,"hide");
 				break;
 			case "shuffle":
-				var bool = confirm("你確定要將拼圖洗牌嗎？");
+				var bool = confirm("你確定要重新挑戰嗎？");
 				if(bool){
-					s.generateGame();
-					s.initGame();
+                                    //s.generateGame();
+                                    //s.initGame();
+                                    location.reload();
 				}
 				break;
 			}
