@@ -1,5 +1,6 @@
 #uploadContainer{
-    width: 75vw; 
+    width: 75vw;
+    max-width: 500px;
     /*height: 300px;*/
     /*height: 75vh;*/
     margin: 20px auto; 
@@ -25,13 +26,17 @@
     clear:both;
     float:left;
 }
-#helpText {
+.helpText {
     clear:both;
     font-weight: bold;
     color: #4D6C81;
     max-width: 500px;
     margin: 0 auto;
 }
+.footer {
+    text-align: center;
+}
+
 #helpText h1 {
     text-align: center;
     margin-top: 1rem;

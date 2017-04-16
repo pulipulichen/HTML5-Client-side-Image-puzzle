@@ -102,7 +102,7 @@
         _tileStyle.push("." + s.m.emptyTile + " {background: #666666 !important;} ");
         _tileStyle.push(".gameBoard {width: " + _slider_width + "px !important;}");
         _tileStyle.push("#source_holder {width: " + _slider_width + "px !important;height: " + _slider_width + "px !important;background-size:" + _slider_width + "px;}");
-        _tileStyle.push("#helpText {max-width: " + _slider_width + "px !important;}");
+        _tileStyle.push(".helpText {max-width: " + _slider_width + "px !important;}");
         style.innerHTML = _tileStyle.join("\n");
         //console.log(_tileStyle);
         document.getElementsByTagName('head')[0].appendChild(style);
