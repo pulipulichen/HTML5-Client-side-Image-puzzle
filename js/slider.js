@@ -61,7 +61,7 @@ slider.helpclick = function(msg){
             //_u = "http://www.google.com.tw";
             _u = encodeURIComponent(_u);
             
-            var _description = "圖片拼圖遊戲";
+            var _description = "滑塊拼圖遊戲";
             _description = encodeURIComponent(_description);
             
             var _picture = slider.imageURL;
