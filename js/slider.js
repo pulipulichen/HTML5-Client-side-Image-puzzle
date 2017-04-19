@@ -9,7 +9,7 @@ var slider = {};
 slider.tileSize = 4;
 slider.enable = true;
 slider.enableSuffle = true;
-slider.tileSizeMin = 4;
+slider.tileSizeMin = 3;
 slider.tileSizeMax = 8;
 
 // -----------------------------------------------
