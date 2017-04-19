@@ -63,7 +63,7 @@
             //shuffle(_tiles);
             // 執行交換title 100次的動作
             var _last_direct;
-            for (var _i = 0; _i < 10 * s.m.size * s.m.size; _i++) {
+            for (var _i = 0; _i < slider.shuffle_weight * s.m.size * s.m.size; _i++) {
                 //var _direct = shuffle(["u", "d", "l", "r"])[0];
                 var _enable_dir_config = {
                     u: true,

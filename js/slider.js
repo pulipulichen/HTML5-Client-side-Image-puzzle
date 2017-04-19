@@ -11,6 +11,7 @@ slider.enable = true;
 slider.enableSuffle = true;
 slider.tileSizeMin = 3;
 slider.tileSizeMax = 8;
+slider.shuffle_weight = 100;
 
 // -----------------------------------------------
 
