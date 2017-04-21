@@ -13,6 +13,8 @@ slider.tileSizeMin = 3;
 slider.tileSizeMax = 8;
 slider.shuffle_weight = 100;
 
+slider.enableLogStep = false;
+
 // -----------------------------------------------
 
 slider.m = {};
