@@ -44,7 +44,7 @@ slider.helpclick = function(msg){
             document.getElementById("game").style.display = "block";
         }
         else if (msg === "newgame") {
-            location.href='index.html?size=' + slider.tileSize;
+            location.href='index.html?size=' + slider.tileSize + '&tmp_img=' + slider.imageURL;
         }
         else if (msg === "share") {
             var _time = document.getElementById("timeElapsed").innerText;
@@ -256,6 +256,7 @@ slider.attachDragNDrop = function(){
 
 slider.imageURL = undefined;
 slider.readURL = function (url) {
+    //url = unescape(url);
     var _source_holder = document.getElementById("source_holder");
     if (_source_holder === undefined || _source_holder === null) {
         setTimeout(function () {
@@ -264,11 +265,20 @@ slider.readURL = function (url) {
         return;
     }
     
-    if ((url.match(/\.(jpeg|jpg|gif|png)$/) === null)) {
-        alert("這是一個無效的網址喔。");
+    console.log(getQueryVariable("tmp_img"));
+    if (getQueryVariable("tmp_img") !== undefined) {
+        document.getElementById("url_input").value = getQueryVariable("tmp_img");
+    }
+    
+    if (url === undefined || (url.match(/\.(jpeg|jpg|gif|png)$/) === null)) {
+        //console.log(url);
+        if (url !== undefined && typeof(url) === "string" && url !== "undefined") {
+            alert("這是一個無效的網址喔: " + url);
+        }
         return;
     }
     
+    url = unescape(url);
     _source_holder.style.backgroundImage = 'url(' + url + ')';
     slider.imageURL = url;
     document.getElementById("url_input").value = url;
@@ -307,19 +317,21 @@ slider.getSelectTileSize = function () {
     return _size;
 };
 
-slider.loadByParameter = function () {
-    var getQueryVariable = function (variable) {
-        var query = window.location.search.substring(1);
-        var vars = query.split("&");
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split("=");
-            if (pair[0] === variable) {
-                return pair[1];
-            }
+var getQueryVariable = function (variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] === variable) {
+            return pair[1];
         }
-        //alert('Query Variable ' + variable + ' not found');
-        return undefined;
-    };
+    }
+    //alert('Query Variable ' + variable + ' not found');
+    return undefined;
+};
+
+slider.loadByParameter = function () {
+    
     
     var _img = getQueryVariable("img");
     _img = unescape(_img);
