@@ -322,6 +322,7 @@ slider.loadByParameter = function () {
     };
     
     var _img = getQueryVariable("img");
+    _img = unescape(_img);
     var _size = getQueryVariable("size");
     if (_size !== undefined) {
         slider.tileSize = parseInt(_size, 10);
